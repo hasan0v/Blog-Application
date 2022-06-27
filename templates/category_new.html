@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if user.is_superuser %}
+        <h1>New Category</h1>
+        <div class="form-group">
+            <form action="" method="post"> {% csrf_token %}
+            {{form.media}}
+            {{form.as_p}}
+            <button class="btn btn-primary save_btn"><i class="fa-regular fa-floppy-disk"></i></button>
+            
+            </form>
+            
+        </div>
+    {% else %}
+        <h1 style="color:yellow;"> Access Denied !!! <h1/>
+    {% endif %}
+{% endblock content %}

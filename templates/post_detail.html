@@ -1,0 +1,52 @@
+{% extends 'base.html'%}
+{% block title %}
+ | {{object.title}}
+{% endblock %}
+{% load static %}
+{% block content %}
+    <div class="post-entry">
+        {% comment %} {{object.author.profile.id}} {% endcomment %}
+    <h2>{{object.title}}</h2>
+        
+        {% if object.author.profile.prof_pic %}
+            <img class="rounded-circle prof_img" src="{{ object.author.profile.prof_pic.url }}" width=20, height=20>
+            <a href="{% url 'show_profile_page' object.author.profile.id %}">{{object.author.username}}</a>
+            <br/>
+        {% else %}
+            <img class="rounded-circle prof_img" src="{% static 'images/default.jpg' %}" width=20, height=20>
+            <a href="{% url 'show_profile_page' object.author.profile.id %}">{{object.author.username}}</a>
+            <br/>
+        {% endif %}
+            
+        {{object.post_date}}<br/>
+        <div  class="card-link cats"><a href="{% url 'category' posts.category %}">{{posts.category}}</a></div>
+        <div  class="card-link like_counter">{{ total_likes }} liked</div>
+        {% if user.is_authenticated %}
+            {% if user.id == posts.author_id %}
+                <a href="{% url 'delete_post' posts.pk %}" class="btn btn-danger delete"><i class="fa-regular fa-trash-can"></i></a>
+                <a href="{% url 'update_post' posts.pk %}" class="btn btn-primary edit"><i class="fa-regular fa-pen-to-square"></i></a>
+            {% endif %}
+
+        {% endif %}
+        <br/>
+        <hr>
+        <div class="card cardblog"><i>{{object.body|safe}}</i></div>
+        <br/>
+
+        
+        {% if user.is_authenticated %}
+            <form action="{% url 'like_post' posts.pk %}" method="POST">{% csrf_token %}
+            {% if liked %}
+                <button type="submit" class="btn btn-primary hit_dislike"  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unsmile" name="post_id" value="{{ posts.id }}" ><i class="fas fa-face-grin-squint"></i></button>
+            {% else %}
+                <button type="submit" data-toggle="tooltip" data-placement="bottom" title="Smile" data-html="true" name="post_id", value="{{ posts.id }}" class="btn btn-primary hit_like"><i class="fa-regular fa-face-grin-squint"></i></button>
+            {% endif %}
+            </form>
+        {% endif %}
+
+    </div>
+
+
+
+
+{% endblock content %}

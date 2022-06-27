@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        {% if user.id == posts.author_id %}
+            <h1>Delete Post</h1>
+            <br/>
+            <br/>
+            <div class="form-group">
+                <form action="" method="post" class="delete_form"> 
+                {% csrf_token %}
+                <strong>Are you sure to delete "{{ posts.title }}" ?</strong>
+                <br/>
+                <br/>
+                <br/>
+                <a href="{% url 'post_detail' posts.pk %}" class="btn btn-secondary">No</a>
+                <button class="btn btn-danger">Yes</button>
+                </form>
+            </div>
+        {% else %}
+            <h1 style="color:red;"> Access Denied !!! <h1/>
+        {% endif %}
+    {% else %}
+    <h1 style="color:yellow;"> Access Denied !!! <h1/>
+    {% endif %}
+{% endblock content %}

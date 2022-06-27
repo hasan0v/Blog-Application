@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% csrf_token %}
+
+
+        <div class="row gutters-sm">
+            <div class="col-md-3 mb-3">
+              <div class="card profcard profpic">
+                <div class="card-body">
+                  <div class="d-flex flex-column align-items-center text-center">
+                    {% if object.prof_pic %}
+                        <img class="rounded-circle prof_img" src="{{ object.prof_pic.url }}" width=100, height=100>
+                    {% else %}
+                        <img class="rounded-circle prof_img" src="{% static 'images/default.jpg' %}" width=100, height=100><br/>
+                    {% endif %}
+                    
+                    <div class="mt-3">
+                      <h3>{{ object }}</h3>
+                      
+                     
+                    {% if user.is_authenticated %}
+                      <form action="{% url 'follow' profile.id %}" method="POST">{% csrf_token %}
+                      {% if follower %}
+                        <button type="submit" title="Unfollow" data-html="true" name="user_id", value="{{ profile.id }}" class="btn btn-primary">Unfollow</button>
+                      {% else %}
+                        <button type="submit" title="Follow" data-html="true" name="user_id", value="{{ profile.id }}" class="btn btn-primary">Follow</button>
+                      {% endif %}
+                      </form>
+                    {% endif %}
+                    
+                    
+                    
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="card mb-3 profcard profinfo">
+                <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-3 mt-2"  >
+                      <h6 class="mb-0">Followers</h6>
+                    </div>
+                    <div class="col-sm-1 mt-1">
+                        <div class="card-link">{{ profile.total_follower }}</div>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Username</h6>
+                    </div>
+                    <div class="col-sm-9">
+                      {{object}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Bio</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{object.bio}}
+                    </div>
+                  </div>
+                  <hr>
+                
+                </div>
+              </div>
+                {% comment %} <a class="btn btn-primary" href="/../Blog/Members/templates/registration/user_stats.html" title="Show stats">Show stats</a> {% endcomment %}
+                {% comment %} <a type="submit" class="btn btn-primary" href="{% url 'stats' %}" title="Show stats" name="stats", class="btn btn-primary">Show stats</a> {% endcomment %}
+              {{user.id}} koko {{profile.id}}
+              <form action="{% url 'stats' profile.id %}" method="POST">{% csrf_token %}
+                <button type="submit" class="btn btn-primary" id="statsbtn" title="Show stats" name="stats" value={{ profile.id }}>Show stats</button>
+              </form>
+            </div>
+          </div>
+        <script src="{% static  'js/follow_ajax.js'%}"></script>
+
+    {% endblock content %}

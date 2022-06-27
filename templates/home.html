@@ -1,0 +1,39 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+<h1>Posts</h1>
+<br/>
+    {% for post in object_list %}
+
+    <div class="post-entry" id="{{post.pk}}">
+        <a href='{% url "post_detail" post.pk %}'>
+        <div class="card">
+            <div class="card-body">
+                <h5>{{post.author.username}}</h5>
+                <h5 class="card-title">{{post.title}}</h5>
+                <p class="card-text max-lines"><i id='text_{{post.pk}}'>{{ post.snippet|slice:":100"|safe }}</i></p>
+                <p class="card-text"><i style="font-size:14px">Click above to read more...</i></p>
+                <div class="card-link cats"><a href="{% url 'category' post.category %}">{{post.category}}</a></div>
+                <h6 href="#" class="card-link date">{{post.post_date}}</h6>
+                {% comment %} <div class="card-link liked"><i class="fa-regular fa-face-grin-squint" id="like_icon"></i> 11</div>  {% endcomment %}
+
+                {% comment %} <p class="card-text max-lines"><i id='text_{{post.pk}}'>{{ post.body|slice:":100"|safe }}</i></p> {% endcomment %}
+                {% comment %} <p href="#" class="card-link">{{post.like}}</p> {% endcomment %}
+
+            </div>
+        </div>
+        </a>
+
+    </div>
+
+    {% endfor %}
+    {% if user.is_authenticated %}
+        <a class="btn btn-primary new_post" href="{% url 'new_post' %}"> + NEW POST</a>
+        {% if user.is_superuser %}
+            <a class="btn btn-primary new_category" href="{% url 'new_category' %}"> + NEW CATEGORY</a>
+        {% endif %} 
+    {% endif %} 
+
+ 
+{% endblock content %}

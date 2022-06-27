@@ -1,0 +1,250 @@
+.card {
+  width: 70%;
+  height: 13rem;
+  margin-bottom: 2rem;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  color: black;
+  box-shadow: 3px 2px 5px lightslategrey, -4px -4px 5px white;
+  margin-left: 1rem;
+  border-radius: 28px;
+}
+.card:hover{
+  background-color: rgb(243 240 240);
+  box-shadow: 3px 3px 5px #adadad, -4px -4px 5px white;
+  /* transform: scale(1.05,1.05); */
+}
+p{
+    margin: 0!important;
+}
+.new_category{
+  position: fixed;
+  bottom: 15%;
+  right: 3%;
+  z-index: 9999;
+  border-radius: 41px;
+}
+.new_post{
+    position: fixed;
+    bottom: 6%;
+    right: 3%;
+    z-index: 9999;
+    border-radius: 41px;
+}
+
+  @supports (mask-image: paint(smooth-corners)) {
+    .new_post.is-loaded {
+      border-radius: 0;
+      mask-image: paint(smooth-corners);
+      --smooth-corners: 3.3;
+    }
+  }
+h5.card-title {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+header.masthead {
+    background-color: black;
+}
+.delete_form{
+  text-align: center;
+}
+.save_btn {
+  position: absolute;
+  right: 8.5%;
+}
+.max-lines {
+    display: block; /* or inline-block */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: break-word;
+    overflow: hidden;
+    max-height: 4.5em;
+    line-height: 2em;
+  
+}
+.date{
+  position: absolute;
+  bottom: .25rem;
+  font-size: 14px;
+  font-weight: 600;
+  left: 78%;
+  display: inline;
+}
+.cats{
+  position: relative;
+  top: .5rem;
+  font-size: 12px;
+  font-weight: 600;
+  left: 0;
+  display: inline;
+  background-color: chartreuse;
+  padding: 0.5rem;
+  border-radius: 14px;
+  box-shadow: 2px 2px 5px yellowgreen;
+}
+.catsbutton{
+  position: relative;
+  top: 1rem;
+}
+.user_dropdown{
+  min-width: 5rem;
+  padding: 0.5rem 0;
+  margin: 0;
+  font-size: .8rem;
+  top: 2rem !important;
+}
+.dropdown-item.active, .dropdown-item:active {
+  background-color: chartreuse;
+}
+.btn-primary {
+  background-color: chartreuse;
+  color: black;
+  border: none;
+}
+.btn-primary:hover{
+  background-color: chartreuse;
+  border-color: transparent;
+  box-shadow: 4px 4px 5px #0012ff, -4px -4px 5px white;
+}
+.btn-primary:active, .btn-primary:focus {
+  background-color: chartreuse;
+  border-color: transparent;
+}
+.card-link.liked {
+  position: relative;
+  display: inline-block;
+  top: .8rem;
+}
+.edit{
+  position: fixed;
+  bottom: 15%;
+  right: 3%;
+  z-index: 9999;
+  border-radius: 41px;
+}
+.edit:hover{
+  background-color: chartreuse;
+  color: #000;
+  border-color: transparent;
+  box-shadow: 4px 4px 5px #0012ff, -4px -4px 5px white;
+}
+.delete{
+  position: fixed;
+  bottom: 25%;
+  right: 3%;
+  z-index: 9999;
+  border-radius: 41px;
+  background-color: rgb(255 0 0);
+  
+}
+.delete:hover{
+  background-color: red;
+  border-color: transparent;
+  box-shadow: 4px 4px 5px #0012ff, -4px -4px 5px white;
+}
+.hit_like{
+  position: fixed;
+  bottom: 5%;
+  right: 3.4%;
+  z-index: 9999;
+  color: #00b0ff;
+  background-color: transparent;
+  border: none;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  font-size: 54px;
+}
+.hit_dislike{
+  position: fixed;
+  bottom: 5%;
+  right: 3.4%;
+  z-index: 9999;
+  color: #00b0ff;
+  background-color: transparent;
+  border: none;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  font-size: 54px;
+}
+.like_counter{
+  position: relative;
+  top: .5rem;
+  font-size: 12px;
+  font-weight: 600;
+  left: 0;
+  display: inline;
+  background-color: #00b0ff;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 14px;
+  box-shadow: 2px 2px 5px #32c5cd;
+}
+
+svg.svg-inline--fa.fa-face-grin-squint {
+  position: relative;
+  bottom: 0.55em;
+  right: 0.5em;
+  border-radius: 50%;
+  background-color: transparent;
+}
+svg.svg-inline--fa.fa-face-grin-squint:hover {
+  box-shadow: 4px 4px 5px #0012ff, -4px -4px 5px white;
+}
+
+.hit_dislike:hover{
+  background-color: transparent;
+  color: #00b0ff;
+  box-shadow: none;
+}
+.hit_like:hover{
+  background-color: transparent;
+  color: #00b0ff;
+  box-shadow: none;
+}
+header.masthead {
+  background-color: chartreuse;
+}
+svg.svg-inline--fa.fa-trash-can {
+  color: black;
+}
+
+#like_icon{
+  position: relative;
+  top: 0.037em;
+  left: 0.03em;
+}
+#like_icon:hover{
+  box-shadow: none;
+}
+.footer_icons{
+  width: 3rem;
+  height: 3rem;
+}
+
+.prof_img{
+  object-fit: cover;
+  margin: .3rem;
+  position: relative;
+  bottom: 0.1rem;
+}
+.profcard{
+  height: auto;
+}
+.profinfo{
+  width: 90%;
+}
+.profpic{
+  width: 90%;
+}
+.cardblog{
+  height: auto;
+  width: 90%;
+  padding: 2rem;
+}
+.cardblog:hover{
+  background-color: #ffffff;
+}
