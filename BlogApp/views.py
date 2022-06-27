@@ -4,7 +4,8 @@ from .models import Posts, Category
 from .forms import PostForm, EditForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
-
+from django.db import connection
+from .tools import get_who_liked_this_post
 # Create your views here.
 
 def LikeView(request, pk):
@@ -43,7 +44,8 @@ class PostDetailView(DetailView):
         liked = False
         if stuff.likes.filter(id=self.request.user.id).exists():
             liked = True
-
+        who = get_who_liked_this_post(self.kwargs['pk'])
+        context['who_liked'] = who
         context["liked"] = liked
         context["cat_menu"] = cat_menu
         context["total_likes"] = total_likes

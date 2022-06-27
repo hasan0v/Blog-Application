@@ -14,7 +14,7 @@ class Profiles(models.Model):
     instagram_url=models.CharField(max_length=255, null=True, blank=True)
     twitter_url=models.CharField(max_length=255, null=True, blank=True)
     prof_pic = models.ImageField(null=True, blank=True, upload_to="images/prof_pics")
-    follower = models.ManyToManyField(User, related_name='blog_profile')
+    follower = models.ManyToManyField(User, blank=True, related_name='blog_profile')
     # follow = models.ManyToManyField(User, related_name='blog_user')
 
 
@@ -30,7 +30,7 @@ class Posts (models.Model):
     author=models.ForeignKey(User, on_delete=models.CASCADE)
     body=RichTextField(blank=True, null=False)
     post_date = models.DateField(auto_now_add=True)
-    category = models.CharField(max_length=255, default="coding")
+    category = models.CharField(max_length=255, default="Coding")
     snippet=RichTextField(blank=True, null=False, max_length=100)
     likes = models.ManyToManyField(User, related_name='blogapp_posts')
 
@@ -63,7 +63,7 @@ class Category (models.Model):
 
 
 
-        
+
 # class Profile(models.Model):
 #     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
 #     bio = models.TextField()

@@ -3,7 +3,6 @@
 {% block content %}
 {% csrf_token %}
 
-{% comment %} 
         <div class="row gutters-sm">
             <div class="col-md-3 mb-3">
               <div class="card profcard profpic">
@@ -18,8 +17,7 @@
                     <div class="mt-3">
                       <h3>{{ object }}</h3>
                       
-                     
-                    {% if user.is_authenticated %}
+                    {% if user.is_authenticated and myself %}
                       <form action="{% url 'follow' profiles.id %}" method="POST">{% csrf_token %}
                       {% if follower %}
                         <button type="submit" title="Unfollow" data-html="true" name="user_id", value="{{ profiles.id }}" class="btn btn-primary">Unfollow</button>
@@ -29,7 +27,6 @@
                       </form>
                     {% endif %}
                     
-                     {% endcomment %}
                     
                     </div>
                   </div>
@@ -39,15 +36,6 @@
             <div class="col-md-9">
               <div class="card mb-3 profcard profinfo">
                 <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-3 mt-2"  >
-                      <h6 class="mb-0">Followers</h6>
-                    </div>
-                    <div class="col-sm-1 mt-1">
-                        <div class="card-link">{{ profiles.total_follower }}</div>
-                    </div>
-                  </div>
-                  <hr>
                   <div class="row">
                     <div class="col-sm-3">
                       <h6 class="mb-0">Username</h6>
@@ -69,12 +57,61 @@
                 
                 </div>
               </div>
-                {% comment %} <a class="btn btn-primary" href="/../Blog/Members/templates/registration/user_stats.html" title="Show stats">Show stats</a> {% endcomment %}
-                {% comment %} <a type="submit" class="btn btn-primary" href="{% url 'stats' %}" title="Show stats" name="stats", class="btn btn-primary">Show stats</a> {% endcomment %}
-              {{ user.id}} koko {{profiles.id}}
-              <form action="{% url 'stats' profiles.id %}" method="POST">{% csrf_token %}
+              {% comment %} <form action="{% url 'stats' profiles.id %}" method="POST">{% csrf_token %}
                 <button type="submit" class="btn btn-primary" id="statsbtn" title="Show stats" name="stats" value={{ profiles.id }}>Show stats</button>
-              </form>
+              </form> {% endcomment %}
+            </div>
+            <div class="col-md-3">
+              <div class="card mb-3 profcard profinfo">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-12 mt-2">
+                      <h6 class="mb-0">Liked Posts : {{count_liked_posts}}</h6>
+                    </div>
+                      {% for liked_post in liked_posts %}
+                      <a href="/../post/{{liked_post.posts_id}}" class="mb-0">
+                        <div class="follow">{{liked_post.title}}</div>
+                      </a>
+
+                      {% endfor%}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-9 followerinfo">
+              <div class="card mb-3 profcard profinfo">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-6 mt-2">
+                      <h6 class="mb-0">Follows :    {{count_follows}}</h6>
+                      <hr>
+                      {% for follow in follows %}
+                            
+                              <a href="/../members/{{follow.id}}/profile" class="mb-0 follow">
+                                <div class="follow">{{follow.username}}</div>
+                              </a>
+                            
+                            <br/>
+                      {% endfor %}
+                    </div>
+                    <div class="col-sm-6 mt-2"  >
+                      <h6 class="mb-0">Followers :    {{count_followers}}</h6>
+                      <hr>
+                      {% for follower in followers %}
+                            <a href="/../members/{{follower.id}}/profile" class="mb-0">
+                              <div class="follower">{{follower.username}}</div>
+                            </a>
+                            
+                            <br/>
+                      {% endfor %}
+                    </div>
+                  </div>
+                <hr>
+                </div>
+              </div>
+              {% comment %} <form action="{% url 'stats' profiles.id %}" method="POST">{% csrf_token %}
+                <button type="submit" class="btn btn-primary" id="statsbtn" title="Show stats" name="stats" value={{ profiles.id }}>Show stats</button>
+              </form> {% endcomment %}
             </div>
           </div>
         <script src="{% static  'js/follow_ajax.js'%}"></script>

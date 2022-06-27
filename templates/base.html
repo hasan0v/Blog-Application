@@ -67,8 +67,8 @@
                                 <i class="fa-solid fa-user-astronaut" style="font-size:1rem;"></i>
                         </a>
                         <ul class="dropdown-menu user_dropdown" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{% url 'show_profile_page' user.id %}">Show profile</a></li>
-                            <li><a class="dropdown-item" href="{% url 'edit_profile_page' user.id %}">Edit profile</a></li>
+                            {% comment %} <li><a class="dropdown-item" href="{% url 'show_profile_page' user.id %}">Show profile</a></li>
+                            <li><a class="dropdown-item" href="{% url 'edit_profile_page' user.id %}">Edit profile</a></li> {% endcomment %}
                             <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Edit profile settings</a></li>
                             <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                         </ul>

@@ -146,8 +146,8 @@ header.masthead {
 }
 .hit_like{
   position: fixed;
-  bottom: 5%;
-  right: 3.4%;
+  bottom: 7%;
+  right: 5.4%;
   z-index: 9999;
   color: #00b0ff;
   background-color: transparent;
@@ -159,8 +159,8 @@ header.masthead {
 }
 .hit_dislike{
   position: fixed;
-  bottom: 5%;
-  right: 3.4%;
+  bottom: 7%;
+  right: 5.4%;
   z-index: 9999;
   color: #00b0ff;
   background-color: transparent;
@@ -184,26 +184,31 @@ header.masthead {
   box-shadow: 2px 2px 5px #32c5cd;
 }
 
-svg.svg-inline--fa.fa-face-grin-squint {
-  position: relative;
-  bottom: 0.55em;
-  right: 0.5em;
-  border-radius: 50%;
+.hit_like:focus{
   background-color: transparent;
+  border: none;
+  box-shadow: none;
 }
-svg.svg-inline--fa.fa-face-grin-squint:hover {
-  box-shadow: 4px 4px 5px #0012ff, -4px -4px 5px white;
-}
-
-.hit_dislike:hover{
+.hit_dislike:focus{
   background-color: transparent;
-  color: #00b0ff;
+  border: none;
+  box-shadow: none;
+}
+.hit_like:active{
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+.hit_dislike:active{
+  background-color: transparent;
+  border: none;
   box-shadow: none;
 }
 .hit_like:hover{
-  background-color: transparent;
   color: #00b0ff;
-  box-shadow: none;
+}
+.hit_dislike:hover{
+  color: #00b0ff;
 }
 header.masthead {
   background-color: chartreuse;
@@ -216,9 +221,6 @@ svg.svg-inline--fa.fa-trash-can {
   position: relative;
   top: 0.037em;
   left: 0.03em;
-}
-#like_icon:hover{
-  box-shadow: none;
 }
 .footer_icons{
   width: 3rem;
@@ -234,6 +236,10 @@ svg.svg-inline--fa.fa-trash-can {
 .profcard{
   height: auto;
 }
+.profcard:hover{
+  background-color: #ffffff;
+  box-shadow: 3px 2px 5px lightslategrey, -4px -4px 5px white;
+}
 .profinfo{
   width: 90%;
 }
@@ -247,4 +253,45 @@ svg.svg-inline--fa.fa-trash-can {
 }
 .cardblog:hover{
   background-color: #ffffff;
+}
+.followerinfo{
+  margin-left: auto;
+}
+.follow{
+  border-bottom: 1px solid grey;
+  width: 100%;
+}
+.follower{
+  border-bottom: 1px solid grey;
+  width: 100%;
+}
+.follow:hover{
+  background-color: #dbd9d9;
+  border: none;
+}
+.follower:hover{
+  background-color: #dbd9d9;
+  border: none;
+}
+.col-md-9 {
+  height: max-content;
+}
+.accordion-item {
+  position: relative;
+  left: 11rem;
+  bottom: 1rem;
+}
+button.accordion-button {
+  border-radius: 36px;
+  width: max-content;
+  height: 2.2rem;
+  color: #00b0ff;
+  border: 1px solid #00b0ff;
+}
+.accordion-button::after {
+  background-image: none!important;
+}
+.likers:hover{
+  background-color: #dbd9d9;
+
 }
