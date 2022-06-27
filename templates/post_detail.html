@@ -5,16 +5,16 @@
 {% load static %}
 {% block content %}
     <div class="post-entry">
-        {% comment %} {{object.author.profile.id}} {% endcomment %}
+        {% comment %} {{object.author.profiles.id}} {% endcomment %}
     <h2>{{object.title}}</h2>
         
-        {% if object.author.profile.prof_pic %}
-            <img class="rounded-circle prof_img" src="{{ object.author.profile.prof_pic.url }}" width=20, height=20>
-            <a href="{% url 'show_profile_page' object.author.profile.id %}">{{object.author.username}}</a>
+        {% if object.author.profiles.prof_pic %}
+            <img class="rounded-circle prof_img" src="{{ object.author.profiles.prof_pic.url }}" width=20, height=20>
+            <a href="{% url 'show_profile_page' object.author.profiles.id %}">{{object.author.username}}</a>
             <br/>
         {% else %}
             <img class="rounded-circle prof_img" src="{% static 'images/default.jpg' %}" width=20, height=20>
-            <a href="{% url 'show_profile_page' object.author.profile.id %}">{{object.author.username}}</a>
+            <a href="{% url 'show_profile_page' object.author.profiles.id %}">{{object.author.username}}</a>
             <br/>
         {% endif %}
             

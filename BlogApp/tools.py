@@ -28,18 +28,11 @@ def stats(request, pk):
         
         print(pk)
         cursor.execute("""
-            SELECT * FROM blogapp_profile_follow where '{pk}';
+            SELECT count(user_id) FROM blogapp_profiles_follower where profiles_id = 1;
         """)
         data_dict = dictfetchall(cursor)
         
-        # cursor.execute("""
-        #     SELECT user_id FROM blogapp_profile_follow where {{ user }};
-        # """)
-        # follower_count = dictfetchall(cursor)
 
-        # cursor.execute("""
-        #     SELECT * FROM blogapp_profile_follow where {{ user }};
-        # """)
         follow_count = dictfetchall(cursor)
 
 

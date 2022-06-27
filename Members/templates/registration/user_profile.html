@@ -3,7 +3,7 @@
 {% block content %}
 {% csrf_token %}
 
-
+{% comment %} 
         <div class="row gutters-sm">
             <div class="col-md-3 mb-3">
               <div class="card profcard profpic">
@@ -20,16 +20,16 @@
                       
                      
                     {% if user.is_authenticated %}
-                      <form action="{% url 'follow' profile.id %}" method="POST">{% csrf_token %}
+                      <form action="{% url 'follow' profiles.id %}" method="POST">{% csrf_token %}
                       {% if follower %}
-                        <button type="submit" title="Unfollow" data-html="true" name="user_id", value="{{ profile.id }}" class="btn btn-primary">Unfollow</button>
+                        <button type="submit" title="Unfollow" data-html="true" name="user_id", value="{{ profiles.id }}" class="btn btn-primary">Unfollow</button>
                       {% else %}
-                        <button type="submit" title="Follow" data-html="true" name="user_id", value="{{ profile.id }}" class="btn btn-primary">Follow</button>
+                        <button type="submit" title="Follow" data-html="true" name="user_id", value="{{ profiles.id }}" class="btn btn-primary">Follow</button>
                       {% endif %}
                       </form>
                     {% endif %}
                     
-                    
+                     {% endcomment %}
                     
                     </div>
                   </div>
@@ -44,7 +44,7 @@
                       <h6 class="mb-0">Followers</h6>
                     </div>
                     <div class="col-sm-1 mt-1">
-                        <div class="card-link">{{ profile.total_follower }}</div>
+                        <div class="card-link">{{ profiles.total_follower }}</div>
                     </div>
                   </div>
                   <hr>
@@ -71,9 +71,9 @@
               </div>
                 {% comment %} <a class="btn btn-primary" href="/../Blog/Members/templates/registration/user_stats.html" title="Show stats">Show stats</a> {% endcomment %}
                 {% comment %} <a type="submit" class="btn btn-primary" href="{% url 'stats' %}" title="Show stats" name="stats", class="btn btn-primary">Show stats</a> {% endcomment %}
-              {{user.id}} koko {{profile.id}}
-              <form action="{% url 'stats' profile.id %}" method="POST">{% csrf_token %}
-                <button type="submit" class="btn btn-primary" id="statsbtn" title="Show stats" name="stats" value={{ profile.id }}>Show stats</button>
+              {{ user.id}} koko {{profiles.id}}
+              <form action="{% url 'stats' profiles.id %}" method="POST">{% csrf_token %}
+                <button type="submit" class="btn btn-primary" id="statsbtn" title="Show stats" name="stats" value={{ profiles.id }}>Show stats</button>
               </form>
             </div>
           </div>
