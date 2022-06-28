@@ -9,7 +9,7 @@ from BlogApp.models import Profiles
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.urls import reverse
-from BlogApp.tools import user_profile_checker, get_followers, get_follows, get_liked_posts
+from BlogApp.tools import user_profile_checker, get_followers, get_follows, get_liked_posts, get_user_posts
 
 
 # Create your views here.
@@ -55,9 +55,12 @@ class ShowProfilePageView(DetailView):
         followers = get_followers(self.kwargs['pk'])
         follows = get_follows(self.kwargs['pk'])
         liked_posts = get_liked_posts(self.kwargs['pk'])
+        user_posts = get_user_posts(self.kwargs['pk'])
 
         context["liked_posts"] = liked_posts
         context["count_liked_posts"] = len(liked_posts)
+        context["user_posts"] = user_posts
+        context["count_user_posts"] = len(user_posts)
         context["follows"] = follows
         context["count_follows"] = len(follows)
         context["count_followers"] = len(followers)

@@ -78,6 +78,11 @@
                 </div>
               </div>
             </div>
+
+
+            
+
+
             <div class="col-md-9 followerinfo">
               <div class="card mb-3 profcard profinfo">
                 <div class="card-body">
@@ -112,6 +117,23 @@
               {% comment %} <form action="{% url 'stats' profiles.id %}" method="POST">{% csrf_token %}
                 <button type="submit" class="btn btn-primary" id="statsbtn" title="Show stats" name="stats" value={{ profiles.id }}>Show stats</button>
               </form> {% endcomment %}
+            </div>
+            <div class="col-md-3">
+              <div class="card mb-3 profcard profinfo">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-12 mt-2">
+                      <h6 class="mb-0">User Posts : {{count_user_posts}}</h6>
+                    </div>
+                      {% for user_post in user_posts %}
+                      <a href="/../post/{{user_post.id}}" class="mb-0">
+                        <div class="follow">{{user_post.title}}</div>
+                      </a>
+
+                      {% endfor%}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         <script src="{% static  'js/follow_ajax.js'%}"></script>

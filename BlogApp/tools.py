@@ -20,27 +20,6 @@ def add_get_params(response):
     response["Access-Control-Allow-Headers"] = 'x-csrftoken, Content-Type'
 
 @csrf_exempt
-def stats(request, pk):
-    if request.method == "POST":
-        cursor = connection.cursor()
-        
-        cursor.execute("""
-            SELECT count(user_id) FROM blogapp_profiles_follower where profiles_id = 1;
-        """)
-        data_dict = dictfetchall(cursor)
-        
-
-        follow_count = dictfetchall(cursor)
-
-        response = {}
-        response['data'] = data_dict
-        context = {}
-        context['data'] = response
-
-        return render(request, "registration/user_stats.html", context)
-        # return response
-
-
 def get_who_liked_this_post(post_id):
     cursor = connection.cursor()
     id = post_id
@@ -104,6 +83,13 @@ def get_liked_posts(profile_id):
     return data_dict
 
 
-
+def get_user_posts(profile_id):
+    cursor = connection.cursor()
+    cursor.execute("""
+        SELECT id, title FROM dbblog.blogapp_posts
+        WHERE author_id = (SELECT user_id FROM blogapp_profiles WHERE id=%s) and 5=%s""", params=(str(profile_id), 5))
+    
+    data_dict = dictfetchall(cursor)
+    return data_dict
 
 
