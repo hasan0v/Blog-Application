@@ -55,32 +55,3 @@ class Categorie (models.Model):
 
 
 
-# class Category (models.Model):
-#     pass    
-
-# class Posts (models.Model):
-#     pass
-# class Profiles(models.Model): 
-#     pass
-
-
-
-
-
-# class Profile(models.Model):
-#     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-#     bio = models.TextField()
-#     facebook_url=models.CharField(max_length=255, null=True, blank=True)
-#     instagram_url=models.CharField(max_length=255, null=True, blank=True)
-#     twitter_url=models.CharField(max_length=255, null=True, blank=True)
-#     prof_pic = models.ImageField(null=True, blank=True, upload_to="images/prof_pics")
-#     follower = models.ManyToManyField(User, related_name='blog_profile')
-#     # follow = models.ManyToManyField(User, related_name='blog_user')
-
-
-#     def total_follower(self):
-#         return self.follower.count()
-
-
-#     def __str__(self):
-#         return str(self.user)

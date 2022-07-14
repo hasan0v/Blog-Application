@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_list_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post, Categorie
-# from .forms import PostForm, EditForm
+from .forms import PostForm, EditForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 from django.db import connection
@@ -56,7 +56,7 @@ def CategoryView(request, cats):
 
 class PostCreateView(CreateView):
     model=Post
-    # form_class = PostForm
+    form_class = PostForm
     template_name='post_new.html'
     # fields="__all__"
     def get_context_data(self,*args, **kwargs):
@@ -76,7 +76,7 @@ class CategoryCreateView(CreateView):
 class PostUpdateView(UpdateView):
     model=Post
     template_name='update_post.html'
-    # form_class = EditForm
+    form_class = EditForm
     def get_context_data(self,*args, **kwargs):
         cat_menu = Categorie.objects.all()
         context = super(PostUpdateView, self).get_context_data(*args, **kwargs)
