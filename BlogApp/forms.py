@@ -1,13 +1,14 @@
 from django import forms
-from .models import Posts, Category
+from .models import Post, Categorie
 
-choices = Category.objects.all().values_list('name', 'name')
+choices = Categorie.objects.all().values_list('name', 'name')
+# choices = Categorie.objects.all().values_list('id', 'id')
 choices_l = []
 for item in choices:
     choices_l.append(item)
 class PostForm(forms.ModelForm):
     class Meta:
-        model = Posts
+        model = Post
         fields = ('title', 'author', 'category', 'body', 'snippet')
         widgets = {
             'title': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Let\'s write some title to your Post'}),
@@ -19,7 +20,7 @@ class PostForm(forms.ModelForm):
 
 class EditForm(forms.ModelForm):
     class Meta:
-        model = Posts
+        model = Post
         fields = ('title', 'body', 'snippet')
         widgets = {
             'title': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Write title for post'}),

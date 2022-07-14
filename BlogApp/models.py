@@ -7,7 +7,7 @@ from ckeditor.fields import RichTextField
 from datetime import date, datetime
 # Create your models here.
 
-class Profiles(models.Model): 
+class Profile(models.Model): 
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     bio = models.TextField()
     facebook_url=models.CharField(max_length=255, null=True, blank=True)
@@ -25,7 +25,7 @@ class Profiles(models.Model):
     def __str__(self):
         return str(self.user)
 
-class Posts (models.Model):
+class Post (models.Model):
     title=models.CharField(max_length=100)
     author=models.ForeignKey(User, on_delete=models.CASCADE)
     body=RichTextField(blank=True, null=False)
@@ -41,7 +41,7 @@ class Posts (models.Model):
     def get_absolute_url(self):
         return reverse('post_detail', kwargs={"pk": self.pk})
 
-class Category (models.Model):
+class Categorie (models.Model):
     name=models.CharField(max_length=100)
     
     def __str__(self):
@@ -55,10 +55,13 @@ class Category (models.Model):
 
 
 
+# class Category (models.Model):
+#     pass    
 
-
-
-
+# class Posts (models.Model):
+#     pass
+# class Profiles(models.Model): 
+#     pass
 
 
 

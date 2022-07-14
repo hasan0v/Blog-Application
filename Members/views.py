@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm, Password
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
 from .forms import EditProfileForm, SignUpForm, PasswordChangingForm
-from BlogApp.models import Profiles
+from BlogApp.models import Profile
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.urls import reverse
@@ -14,7 +14,7 @@ from BlogApp.tools import user_profile_checker, get_followers, get_follows, get_
 
 # Create your views here.
 def FollowerView(request, pk):
-    user = Profiles.objects.get(id=pk)
+    user = Profile.objects.get(id=pk)
 
     follow = False
     if user.follower.filter(id=request.user.id).exists():
@@ -28,16 +28,16 @@ def FollowerView(request, pk):
 
 
 class ShowProfilePageView(DetailView):
-    model = Profiles
+    model = Profile
     template_name = 'registration/user_profile.html'
     def get_context_data(self,*args, **kwargs):
-        users = Profiles.objects.all()
+        users = Profile.objects.all()
         context = super(ShowProfilePageView, self).get_context_data(*args, **kwargs)
         
-        page_user = get_object_or_404(Profiles, id=self.kwargs['pk'])
+        page_user = get_object_or_404(Profile, id=self.kwargs['pk'])
 
         context["page_user"] = page_user
-        stuff =  Profiles.objects.get(id=self.kwargs['pk'])
+        stuff =  Profile.objects.get(id=self.kwargs['pk'])
         total_follower = stuff.total_follower()
         
         follower = False
@@ -70,7 +70,7 @@ class ShowProfilePageView(DetailView):
         return context
 
 class EditProfilePageView(generic.UpdateView):
-    model = Profiles
+    model = Profile
     template_name = 'registration/edit_profile_page.html'
     fields = ['bio', 'prof_pic']
     success_url  = reverse_lazy('home')
