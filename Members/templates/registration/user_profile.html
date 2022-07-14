@@ -18,11 +18,11 @@
                       <h3>{{ object }}</h3>
                       
                     {% if user.is_authenticated and myself %}
-                      <form action="{% url 'follow' profiles.id %}" method="POST">{% csrf_token %}
+                      <form action="{% url 'follow' profile.id %}" method="POST">{% csrf_token %}
                       {% if follower %}
-                        <button type="submit" title="Unfollow" data-html="true" name="user_id", value="{{ profiles.id }}" class="btn btn-primary">Unfollow</button>
+                        <button type="submit" title="Unfollow" data-html="true" name="user_id", value="{{ profile.id }}" class="btn btn-primary">Unfollow</button>
                       {% else %}
-                        <button type="submit" title="Follow" data-html="true" name="user_id", value="{{ profiles.id }}" class="btn btn-primary">Follow</button>
+                        <button type="submit" title="Follow" data-html="true" name="user_id", value="{{ profile.id }}" class="btn btn-primary">Follow</button>
                       {% endif %}
                       </form>
                     {% endif %}
@@ -57,8 +57,8 @@
                 
                 </div>
               </div>
-              {% comment %} <form action="{% url 'stats' profiles.id %}" method="POST">{% csrf_token %}
-                <button type="submit" class="btn btn-primary" id="statsbtn" title="Show stats" name="stats" value={{ profiles.id }}>Show stats</button>
+              {% comment %} <form action="{% url 'stats' profile.id %}" method="POST">{% csrf_token %}
+                <button type="submit" class="btn btn-primary" id="statsbtn" title="Show stats" name="stats" value={{ profile.id }}>Show stats</button>
               </form> {% endcomment %}
             </div>
             <div class="col-md-3">
@@ -69,7 +69,7 @@
                       <h6 class="mb-0">Liked Posts : {{count_liked_posts}}</h6>
                     </div>
                       {% for liked_post in liked_posts %}
-                      <a href="/../post/{{liked_post.posts_id}}" class="mb-0">
+                      <a href="/../post/{{liked_post.post_id}}" class="mb-0">
                         <div class="follow">{{liked_post.title}}</div>
                       </a>
 
@@ -114,8 +114,8 @@
                 <hr>
                 </div>
               </div>
-              {% comment %} <form action="{% url 'stats' profiles.id %}" method="POST">{% csrf_token %}
-                <button type="submit" class="btn btn-primary" id="statsbtn" title="Show stats" name="stats" value={{ profiles.id }}>Show stats</button>
+              {% comment %} <form action="{% url 'stats' profile.id %}" method="POST">{% csrf_token %}
+                <button type="submit" class="btn btn-primary" id="statsbtn" title="Show stats" name="stats" value={{ profile.id }}>Show stats</button>
               </form> {% endcomment %}
             </div>
             <div class="col-md-3">

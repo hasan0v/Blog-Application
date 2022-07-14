@@ -2,7 +2,7 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-        {% if user.id == posts.author_id %}
+        {% if user.id == post.author_id %}
             <h1>Edit Post</h1>
             <div class="form-group">
                 <form action="" method="post"> {% csrf_token %}

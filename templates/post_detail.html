@@ -8,18 +8,18 @@
         
     <h2>{{object.title}}</h2>
         
-        {% if object.author.profiles.prof_pic %}
-            <img class="rounded-circle prof_img" src="{{ object.author.profiles.prof_pic.url }}" width=20, height=20>
-            <a href="{% url 'show_profile_page' object.author.profiles.id %}">{{object.author.username}}</a>
+        {% if object.author.profile.prof_pic %}
+            <img class="rounded-circle prof_img" src="{{ object.author.profile.prof_pic.url }}" width=20, height=20>
+            <a href="{% url 'show_profile_page' object.author.profile.id %}">{{object.author.username}}</a>
             <br/>
         {% else %}
             <img class="rounded-circle prof_img" src="{% static 'images/default.jpg' %}" width=20, height=20>
-            <a href="{% url 'show_profile_page' object.author.profiles.id %}">{{object.author.username}}</a>
+            <a href="{% url 'show_profile_page' object.author.profile.id %}">{{object.author.username}}</a>
             <br/>
         {% endif %}
             
         {{object.post_date}}<br/>
-        <div  class="card-link cats"><a href="{% url 'category' posts.category %}">{{posts.category}}</a></div>
+        <div  class="card-link cats"><a href="{% url 'category' post.category %}">{{post.category}}</a></div>
         {% comment %} <div  class="card-link like_counter"> liked</div> {% endcomment %}
         <div class="col-3 accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item ">
@@ -38,9 +38,9 @@
             </div>
         </div>
         {% if user.is_authenticated %}
-            {% if user.id == posts.author_id %}
-                <a href="{% url 'delete_post' posts.pk %}" class="btn btn-danger delete"><i class="fa-regular fa-trash-can"></i></a>
-                <a href="{% url 'update_post' posts.pk %}" class="btn btn-primary edit"><i class="fa-regular fa-pen-to-square"></i></a>
+            {% if user.id == post.author_id %}
+                <a href="{% url 'delete_post' post.pk %}" class="btn btn-danger delete"><i class="fa-regular fa-trash-can"></i></a>
+                <a href="{% url 'update_post' post.pk %}" class="btn btn-primary edit"><i class="fa-regular fa-pen-to-square"></i></a>
             {% endif %}
 
         {% endif %}
@@ -56,11 +56,11 @@
         
         
         {% if user.is_authenticated %}
-            <form action="{% url 'like_post' posts.pk %}" method="POST">{% csrf_token %}
+            <form action="{% url 'like_post' post.pk %}" method="POST">{% csrf_token %}
             {% if liked %}
                 <button type="submit" class="btn  hit_dislike"  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Dislike" name="post_id" value="{{ posts.id }}" ><i class="fa-solid fa-heart"></i></button>
             {% else %}
-                <button type="submit" data-toggle="tooltip" data-placement="bottom" title="Like" data-html="true" name="post_id", value="{{ posts.id }}" class="btn hit_like"><i class="fa-regular fa-heart"></i></button>
+                <button type="submit" data-toggle="tooltip" data-placement="bottom" title="Like" data-html="true" name="post_id", value="{{ post.id }}" class="btn hit_like"><i class="fa-regular fa-heart"></i></button>
             {% endif %}
             </form>
         {% endif %}

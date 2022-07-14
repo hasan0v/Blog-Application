@@ -24,11 +24,11 @@ def get_who_liked_this_post(post_id):
     cursor = connection.cursor()
     id = post_id
     cursor.execute("""
-        SELECT username, blogapp_profiles.id   from blogapp_posts_likes
-        INNER  JOIN auth_user on auth_user.id=blogapp_posts_likes.user_id
-        INNER  JOIN blogapp_profiles on auth_user.id=blogapp_profiles.user_id
-        INNER  JOIN blogapp_posts on blogapp_posts.id=blogapp_posts_likes.posts_id
-        where posts_id = %s and 5=%s""", params=(str(id), 5))
+        SELECT username, blogapp_profile.id   from blogapp_post_likes
+        INNER  JOIN auth_user on auth_user.id=blogapp_post_likes.user_id
+        INNER  JOIN blogapp_profile on auth_user.id=blogapp_profile.user_id
+        INNER  JOIN blogapp_post on blogapp_post.id=blogapp_post_likes.post_id
+        where post_id = %s and 5=%s""", params=(str(id), 5))
 
     data_dict = dictfetchall(cursor)
 
@@ -40,8 +40,8 @@ def user_profile_checker(profile_id):
     cursor = connection.cursor()
     cursor.execute("""
         SELECT auth_user.id FROM dbblog.auth_user
-        INNER JOIN blogapp_profiles on auth_user.id=blogapp_profiles.user_id
-        WHERE blogapp_profiles.id = %s and 5=%s""", params=(str(profile_id), 5))
+        INNER JOIN blogapp_profile on auth_user.id=blogapp_profile.user_id
+        WHERE blogapp_profile.id = %s and 5=%s""", params=(str(profile_id), 5))
     
     data_dict = dictfetchall(cursor)
 
@@ -49,23 +49,23 @@ def user_profile_checker(profile_id):
 def get_follows(profile_id):
     cursor = connection.cursor()
     cursor.execute("""
-        SELECT username, blogapp_profiles.id FROM dbblog.auth_user
-        INNER JOIN blogapp_profiles on auth_user.id=blogapp_profiles.user_id
-        WHERE blogapp_profiles.id in(SELECT profiles_id 
-        FROM dbblog.blogapp_profiles_follower 
+        SELECT username, blogapp_profile.id FROM dbblog.auth_user
+        INNER JOIN blogapp_profile on auth_user.id=blogapp_profile.user_id
+        WHERE blogapp_profile.id in(SELECT profile_id 
+        FROM dbblog.blogapp_profile_follower 
         WHERE user_id=(SELECT auth_user.id FROM dbblog.auth_user
-        INNER JOIN blogapp_profiles on auth_user.id=blogapp_profiles.user_id
-        WHERE blogapp_profiles.id = %s)) and 5=%s""", params=(str(profile_id), 5))
+        INNER JOIN blogapp_profile on auth_user.id=blogapp_profile.user_id
+        WHERE blogapp_profile.id = %s)) and 5=%s""", params=(str(profile_id), 5))
     
     data_dict = dictfetchall(cursor)
     return data_dict
 def get_followers(profile_id):
     cursor = connection.cursor()
     cursor.execute("""
-        SELECT username, blogapp_profiles.id FROM dbblog.auth_user
-        INNER JOIN blogapp_profiles on auth_user.id=blogapp_profiles.user_id
-        WHERE auth_user.id in (SELECT user_id FROM dbblog.blogapp_profiles_follower
-        WHERE profiles_id=%s) and 5=%s""", params=(str(profile_id), 5))
+        SELECT username, blogapp_profile.id FROM dbblog.auth_user
+        INNER JOIN blogapp_profile on auth_user.id=blogapp_profile.user_id
+        WHERE auth_user.id in (SELECT user_id FROM dbblog.blogapp_profile_follower
+        WHERE profile_id=%s) and 5=%s""", params=(str(profile_id), 5))
     
     data_dict = dictfetchall(cursor)
     return data_dict
@@ -73,10 +73,10 @@ def get_followers(profile_id):
 def get_liked_posts(profile_id):
     cursor = connection.cursor()
     cursor.execute("""
-        SELECT posts_id, title FROM dbblog.blogapp_posts_likes
-        INNER  JOIN blogapp_posts on blogapp_posts.id=blogapp_posts_likes.posts_id
-        INNER  JOIN auth_user on auth_user.id=blogapp_posts_likes.user_id
-        WHERE blogapp_posts_likes.user_id in (SELECT user_id FROM dbblog.blogapp_profiles
+        SELECT post_id, title FROM dbblog.blogapp_post_likes
+        INNER  JOIN blogapp_post on blogapp_post.id=blogapp_post_likes.post_id
+        INNER  JOIN auth_user on auth_user.id=blogapp_post_likes.user_id
+        WHERE blogapp_post_likes.user_id in (SELECT user_id FROM dbblog.blogapp_profile
         WHERE id=%s) and 5=%s""", params=(str(profile_id), 5))
     
     data_dict = dictfetchall(cursor)
@@ -86,8 +86,8 @@ def get_liked_posts(profile_id):
 def get_user_posts(profile_id):
     cursor = connection.cursor()
     cursor.execute("""
-        SELECT id, title FROM dbblog.blogapp_posts
-        WHERE author_id = (SELECT user_id FROM blogapp_profiles WHERE id=%s) and 5=%s""", params=(str(profile_id), 5))
+        SELECT id, title FROM dbblog.blogapp_post
+        WHERE author_id = (SELECT user_id FROM blogapp_profile WHERE id=%s) and 5=%s""", params=(str(profile_id), 5))
     
     data_dict = dictfetchall(cursor)
     return data_dict

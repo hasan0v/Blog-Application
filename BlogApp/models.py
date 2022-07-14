@@ -32,7 +32,7 @@ class Post (models.Model):
     post_date = models.DateField(auto_now_add=True)
     category = models.CharField(max_length=255, default="Coding")
     snippet=RichTextField(blank=True, null=False, max_length=100)
-    likes = models.ManyToManyField(User, related_name='blogapp_posts')
+    likes = models.ManyToManyField(User, related_name='blogapp_post')
 
     def total_likes(self):
         return self.likes.count()
